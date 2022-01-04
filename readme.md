@@ -6,7 +6,7 @@ Note: `react-router-dom` version >= 6 is required
 
 Check out this demo app below in order to get started:
 
-```react
+```JSX
 import {AppRouter, Routes} from 'auth-react-router'
 import {BrowserRouter} from "react-router-dom";
 
