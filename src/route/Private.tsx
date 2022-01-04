@@ -1,15 +1,27 @@
-import React, {FC, ReactElement, Suspense, useContext} from "react";
-import {IRouteProps} from "../types";
-import {Navigate} from "react-router-dom";
-import {RouterContext} from "../context/Context";
+import React, { FC, ReactElement, Suspense, useContext } from 'react';
+import { IRoute } from '../types';
+import { Navigate } from 'react-router-dom';
+import { RouterContext } from '../context/Context';
 
-export const Private: FC<IRouteProps> = (props): ReactElement => {
-  const {component, isAuth, fallback} = props;
+export const Private: FC<IRoute> = (props): ReactElement => {
+  const { component, fallback } = props;
 
   const ctx = useContext(RouterContext);
-  const {routes: {defaultFallback, publicRedirectRoute}} = ctx!;
+  const {
+    routes: { defaultFallback, publicRedirectRoute },
+    isAuth,
+  } = ctx!;
 
-  return !isAuth
-    ? <Navigate to={publicRedirectRoute}/>
-    : <Suspense fallback={fallback ? fallback : defaultFallback}>{component}</Suspense>
-}
+  const redirectTo: string = publicRedirectRoute ? publicRedirectRoute : '/';
+  const suspenseFallback = fallback
+    ? fallback
+    : defaultFallback
+    ? defaultFallback
+    : null;
+
+  return !isAuth ? (
+    <Navigate to={redirectTo} />
+  ) : (
+    <Suspense fallback={suspenseFallback}>{component}</Suspense>
+  );
+};

@@ -1,6 +1,8 @@
-import React from "react";
-import {IRouterCtx} from "../types";
+import React from 'react';
+import { IRouterContextProps } from '../types';
 
-const RouterContext = React.createContext<IRouterCtx | undefined>(undefined)
+const RouterContext = React.createContext<IRouterContextProps | undefined>(
+  undefined
+);
 
-export {RouterContext};
+export { RouterContext };

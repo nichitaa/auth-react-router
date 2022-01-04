@@ -4,84 +4,136 @@ Note: `react-router-dom` version >= 6 is required
 
 ### **Getting Started**
 
-Check out this demo app below in order to get started:
+Define your application routes *(easier to maintain if are in separate file)
 
 ```JSX
-import {AppRouter, Routes} from 'auth-react-router'
-import {BrowserRouter} from "react-router-dom";
+// routes.tsx
 
-const App = () => {
-  const {isAuth} = useAuthProvider();
-  return <BrowserRouter>
-    <AppRouter
-      isAuth={isAuth} // user auth state
-      routes={{
-        publicRedirectRoute: '/', // if unauthorized user will access private path, will redirect to /
-        privateRedirectRoute: '/', // if authorized user will access public path, will redirect to /
-        defaultFallback: <p>loading...</p>, // default fallback (spinner on page change, in case it was not yet loaded)
-        public: [{ // unauthorized users only
-          path: '/public',
-          component: <p>public</p> //  React.lazy(() => import('../pages/Home/HomePage')) will work too
-        }],
-        private: [{ // authorized users only
-          path: '/private',
-          component: <p>private</p>
-        }],
-        common: [{ // authorized and authorized users have access to it
-          path: '/',
-          component: <p>common</p>
-        }, {
-          path: '*',
-          component: <p>page not found 404</p>
-        }]
-      }}>
-      <Routes/> {/* will have all the defined above routes */}
-    </AppRouter>
-  </BrowserRouter>
-}
+import React from 'react';
+import { IRoutesConfig } from 'auth-react-router';
 
-export default App
+export const routes: IRoutesConfig = {
+  publicRedirectRoute: '/profile', // redirect to `/profile` when authorized is trying to access public routes
+  privateRedirectRoute: '/login', // redirect to `/login` when unauthorized user access a private route
+  defaultFallback: <MyCustomSpinner />,
+  public: [
+    {
+      path: '/public',
+      component: React.lazy(() => import('../pages/PublicPage.tsx')),
+    },
+    {
+      path: '/login',
+      component: <LoginPage />,
+    },
+  ],
+  private: [
+    {
+      path: '/private',
+      component: React.lazy(() => import('../pages/PrivatePage.tsx')),
+    },
+    {
+      path: '/profile',
+      component: React.lazy(() => import('../pages/ProfilePage.tsx'))
+    },
+  ],
+  common: [
+    {
+      path: '/',
+      component: <p>common</p>,
+    },
+    {
+      path: '*',
+      component: <p>page not found 404</p>,
+    },
+  ],
+};
 ```
 
+Link the defined above routes using `AppRouter` component
+
+```JSX
+import { AppRouter, Routes } from 'auth-react-router';
+import { BrowserRouter } from 'react-router-dom';
+import { routes } from './routes';
+
+export const App = () => {
+  const { isAuth } = useAuthProvider();
+  return (
+    <BrowserRouter>
+      <AppRouter isAuth={isAuth} routes={routes}>
+        {/* Wrap `Routes` component into a Layout component or add Header */}
+        <Routes />
+      </AppRouter>
+    </BrowserRouter>
+  );
+};
+```
+
+**That is it, super easy!**
+
+To add a new route just add it to `public`, `private` or `common` array and it will work
 
 
-`AppRouter` component interface
+
+### **Router / Routes basic configuration**
+
+`AppRouter` Provider interface
 
 ```typescript
-interface IRouterCtx {
-  routes: IRoutesConfig; // routes configuration
-  isAuth: boolean; // the user auth state
+export interface IRouterContextProps {
+  /** routes configuration */
+  routes: IRoutesConfig;
+
+  /** authorization state of the user, if not provided only `common` routes will work correspondingly */
+  isAuth?: boolean;
 }
 ```
 
 `routes` configuration interface
 
 ```typescript
-interface IRoutesConfig {
-  privateRedirectRoute: string;
-  publicRedirectRoute: string;
-  defaultFallback: React.ReactElement; // default fallback component for routes
-  private: IRoute[];
-  public: IRoute[];
-  common: IRoute[];
+export interface IRoutesConfig {
+  /**
+   * defaults to `/`
+   * authorized users on public routes will be redirected to this route
+   */
+  privateRedirectRoute?: string;
+
+  /**
+   * defaults to `/`
+   * unauthorized users on private routes will be redirected to this route
+   */
+  publicRedirectRoute?: string;
+
+  /** default fallback component for lazy loaded route components */
+  defaultFallback?: React.ReactElement;
+
+  /** private routes are accessible only by authorized users */
+  private?: IRoute[];
+
+  /** public routes are accessible only by unauthorized users */
+  public?: IRoute[];
+
+  /** common routes are accessible only by authorized and unauthorized users */
+  common?: IRoute[];
 }
 ```
-
-`public` routes - authorized users will not have access to `public` routes
-
-`private` routes - unauthorized users will not have access to `private` routes
-
-`common` routes - both, authorized and unauthorized users have access to `common` routes
-
-
 
 single route interface `IRoute`
 
 ```typescript
-interface IRoute {
-  path: string; // valid react-router-dom v6 path string
-  component: React.ReactElement; // supports lazy loading e.g.: React.lazy(() => import('../pages/Home/HomePage'));
-  fallback?: React.ReactElement; // optional fallback for each route, more prioritar then `defaultFallback`
+export interface IRoute {
+  /** a valid react-router-dom v6 path */
+  path: string;
+
+  /** the component to be rendered under the path */
+  component: React.ReactElement;
+
+  /**
+   * if route component is lazy loaded using React.lazy() a fallback loading / spinner component can be specified
+   * it has higher priority then the `defaultFallback` component
+   * */
+  fallback?: React.ReactElement;
 }
 ```
 
