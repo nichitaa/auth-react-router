@@ -11,6 +11,15 @@ Define your application routes *(easier to maintain if are in separate file)
 
 import React from 'react';
 import { IRoutesConfig } from 'auth-react-router';
+import LoginPage from '../pages/LoginPage.tsx';
+
+// public lazy loaded pages
+const LazyPublicPage = React.lazy(() => import('../pages/PublicPage.tsx'));
+
+// private lazy loaded pages
+const LazyPrivatePage = React.lazy(() => import('../pages/PrivatePage.tsx'));
+const LazyProfilePage = React.lazy(() => import('../pages/ProfilePage.tsx'));
+
 
 export const routes: IRoutesConfig = {
   publicRedirectRoute: '/profile', // redirect to `/profile` when authorized is trying to access public routes
@@ -19,7 +28,7 @@ export const routes: IRoutesConfig = {
   public: [
     {
       path: '/public',
-      component: React.lazy(() => import('../pages/PublicPage.tsx')),
+      component: <LazyPublicPage />,
     },
     {
       path: '/login',
@@ -29,11 +38,11 @@ export const routes: IRoutesConfig = {
   private: [
     {
       path: '/private',
-      component: React.lazy(() => import('../pages/PrivatePage.tsx')),
+      component: <LazyPrivatePage />,
     },
     {
       path: '/profile',
-      component: React.lazy(() => import('../pages/ProfilePage.tsx'))
+      component: <LazyProfilePage />
     },
   ],
   common: [
