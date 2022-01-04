@@ -23,7 +23,7 @@ export const Routes = () => {
           />
         ))}
 
-      {isAuth &&
+      {isAuth !== undefined &&
         routes.public &&
         routes.public.map((route) => (
           <Route
@@ -33,7 +33,7 @@ export const Routes = () => {
           />
         ))}
 
-      {isAuth &&
+      {isAuth !== undefined &&
         routes.private &&
         routes.private.map((route) => (
           <Route
