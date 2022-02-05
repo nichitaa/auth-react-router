@@ -12,6 +12,12 @@ export interface IRoute {
    * it has higher priority then the `defaultFallback` component
    * */
   fallback?: React.ReactElement;
+
+  /**
+   * what roles a user must have in order to view this page,
+   * if not provided, then the page can be accessed by every user
+   */
+  roles?: string[];
 }
 
 export interface IRoutesConfig {
@@ -30,6 +36,9 @@ export interface IRoutesConfig {
   /** default fallback component for lazy loaded route components */
   defaultFallback?: React.ReactElement;
 
+  /** fallback in case the user does not have the permission of viewing the page */
+  invalidUserRoleFallback?: React.ReactElement;
+
   /** private routes are accessible only by authorized users */
   private?: IRoute[];
 
@@ -46,4 +55,7 @@ export interface IRouterContextProps {
 
   /** authorization state of the user, if not provided only `common` routes will work correspondingly */
   isAuth?: boolean;
+
+  /** current user role that can be validated for accessing a specific route */
+  userRole?: string;
 }
