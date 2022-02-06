@@ -2,6 +2,7 @@ import React, {FC, ReactElement, Suspense, useContext} from 'react';
 import {RouterContext} from '../context/Context';
 import {IRoute} from '../types';
 import {useRole} from "../hooks/useRole.hook";
+import InvalidUserDefaultFallback from "../shared/InvalidUserDefaultFallback";
 
 
 export const Common: FC<IRoute> = (props): ReactElement => {
@@ -20,10 +21,10 @@ export const Common: FC<IRoute> = (props): ReactElement => {
       : null;
 
   if (!userHasRequiredRole) {
-    if (InvalidUserRoleFallback) {
+    if (InvalidUserRoleFallback)
       return <InvalidUserRoleFallback currentUserRole={userRole} routeRequiredRoles={roles}/>
-    } else return <p>Routes roles are: {JSON.stringify(roles)}, but current user roles are: {userRole}, and add a
-      fallback component here</p>
+    else
+      return <InvalidUserDefaultFallback currentUserRole={userRole} routeRequiredRoles={roles}/>
   }
 
   return <Suspense fallback={SuspenseFallbackComponent}>{component}</Suspense>;

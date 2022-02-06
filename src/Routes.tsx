@@ -1,7 +1,7 @@
-import React, { useContext } from 'react';
-import { RouterContext } from './context/Context';
-import { Route, Routes as ReactRouterDomRoutes } from 'react-router-dom';
-import { Common, Private, Public } from './route';
+import React, {useContext} from 'react';
+import {RouterContext} from './context/Context';
+import {Route, Routes as ReactRouterDomRoutes} from 'react-router-dom';
+import {Common, Private, Public} from './route';
 
 export const Routes = () => {
   const ctx = useContext(RouterContext);
@@ -10,7 +10,7 @@ export const Routes = () => {
       `<Routes /> Component must be inside a SimpleReactRouterProvider`
     );
 
-  const { routes, isAuth } = ctx;
+  const {routes, isAuth} = ctx;
 
   return (
     <ReactRouterDomRoutes>
