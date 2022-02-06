@@ -37,7 +37,7 @@ export interface IRoutesConfig {
   defaultFallback?: React.ReactElement;
 
   /** fallback in case the user does not have the permission of viewing the page */
-  invalidUserRoleFallback?: React.ReactElement;
+  InvalidUserRoleFallback?: React.ComponentType<any>
 
   /** private routes are accessible only by authorized users */
   private?: IRoute[];
