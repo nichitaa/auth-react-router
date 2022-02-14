@@ -19,7 +19,7 @@ export const useRole = (path: string, userRole?: string, routeRoles?: string[]) 
         /** but user has no role */
         const errorMsg = `The path ${path} has some required roles: ${JSON.stringify(routeRoles)}, but current user does not have a role!`;
         console.error(errorMsg);
-        throw new Error(errorMsg);
+        // throw new Error(errorMsg);
       } else {
         /** user has a role, validate it! */
         const roleIsIncluded = routeRoles.includes(userRole);
