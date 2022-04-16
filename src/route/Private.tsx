@@ -1,6 +1,6 @@
 import React, {FC, ReactElement, Suspense, useContext} from 'react';
 import {IRoute} from '../types';
-import {Navigate} from 'react-router-dom';
+import {Navigate, useLocation} from 'react-router-dom';
 import {RouterContext} from '../context/Context';
 import {useRole} from "../hooks/useRole.hook";
 import InvalidUserDefaultFallback from "../shared/InvalidUserDefaultFallback";
@@ -14,7 +14,8 @@ export const Private: FC<IRoute> = (props): ReactElement => {
     userRole
   } = ctx!;
   const [userHasRequiredRole] = useRole(path, userRole, roles);
-
+  const location = useLocation();
+  const { pathname, search } = location;
 
   const redirectTo: string = publicRedirectRoute ? publicRedirectRoute : '/';
   const SuspenseFallbackComponent = fallback
@@ -25,7 +26,7 @@ export const Private: FC<IRoute> = (props): ReactElement => {
 
   /** user must be authorized */
   if (!isAuth) {
-    return <Navigate to={redirectTo}/>;
+    return <Navigate to={redirectTo} state={{ returnUrl: `${pathname}${search}` }}/>;
   } else {
     /** user must have the required role that matches a route role */
     if (!userHasRequiredRole) {
