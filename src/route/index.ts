@@ -1,3 +1,3 @@
-export {Common} from './Common';
-export {Private} from './Private';
-export {Public} from './Public';
+export { Common } from './common';
+export { Private } from './private';
+export { Public } from './public';

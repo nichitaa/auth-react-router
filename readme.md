@@ -1,6 +1,6 @@
-**auth-react-router** is a package that wraps over `react-router-dom` v6 and allows you, to easily define the routes, based on user authorized (`isAuth`) and role (`userRole`) state. It provides a simple API for configuring `public`, `private` and `common` routes (React suspense ready).
+**`auth-react-router`** is a package that wraps over `react-router-dom` v6 and allows you, to easily define the routes, based on user authorized (`isAuth`) and role (`userRole`) state. It provides a simple API for configuring `public`, `private` and `common` routes (React suspense ready) and it has a simple and advance RBAC configuration.
 
-This code and route pattern is used on most of the projects and would probably meet all the routing requirement for a simple or advance react application. 
+This code and route pattern is used on most of the projects and would probably meet all the routing requirement for an actual react application. 
 
 Note: `react-router-dom` version >= 6 is required
 
@@ -22,7 +22,15 @@ const LazyPublicPage = React.lazy(() => import('../pages/PublicPage.tsx'));
 const LazyPrivatePage = React.lazy(() => import('../pages/PrivatePage.tsx'));
 const LazyProfilePage = React.lazy(() => import('../pages/ProfilePage.tsx'));
 
+// define some roles if RBAC is needed
+export const roles = {
+  ADMIN: 'ADMIN',
+  OPERATION: 'OPERATION',
+  MANAGER: 'MANAGER',
+  REGULAR: 'REGULAR',
+};
 
+// routes definition
 export const routes: IRoutesConfig = {
   publicRedirectRoute: '/profile', // redirect to `/profile` when authorized is trying to access public routes
   privateRedirectRoute: '/login', // redirect to `/login` when unauthorized user access a private route
@@ -32,8 +40,7 @@ export const routes: IRoutesConfig = {
   public: [
     {
       path: '/public',
-      component: <LazyPublicPage />,
-      roles: ['admin', 'manager'] // role based routing
+      component: <LazyPublicPage />
     },
     {
       path: '/login',
@@ -44,11 +51,20 @@ export const routes: IRoutesConfig = {
     {
       path: '/private',
       component: <LazyPrivatePage />,
+      // role based routing
+      // user must have ONE of the bellow roles
+      roles: [roles.ADMIN, roles.MANAGER] 
     },
     {
       path: '/profile',
-      component: <LazyProfilePage />
+      component: <LazyProfilePage /> // any autorized user can access this route
     },
+    {
+      path: '/admin_and_operation',
+      roles: [roles.ADMIN, roles.OPERATION], 
+      allRolesRequired: true, // user must have ADMIN and OPERATION role to access this route
+      component: <h1>ADMIN and OPERATION Page</h1>,
+    }
   ],
   common: [
     {
@@ -68,14 +84,15 @@ Link the defined above routes using `AppRouter` component
 ```JSX
 import { AppRouter, Routes } from 'auth-react-router';
 import { BrowserRouter } from 'react-router-dom';
-import { routes } from './routes';
+import { routes, roles } from './routes';
 
 export const App = () => {
   const { isAuth } = useAuthProvider();
   return (
     <BrowserRouter>
       {/* `userRole` is optional, use it only if at least one Route has the `roles` property */}
-      <AppRouter isAuth={isAuth} routes={routes} userRole={'admin'}>
+      {/* `userRole` can be an array of roles too, usually you will fetch it from an API and set it here */}
+      <AppRouter isAuth={isAuth} routes={routes} userRole={roles.ADMIN}>
         {/* Wrap `Routes` component into a Layout component or add Header */}
         <Routes />
       </AppRouter>
@@ -86,7 +103,9 @@ export const App = () => {
 
 **That is it, super easy!**
 
-To add a new route just add it to `public`, `private` or `common` array and it will work
+To add a new route just add it to `public`, `private` or `common` array and it will work. 
+
+**Check out [example](./example) directory for a demo application (includes all most of the described features).**
 
 
 
@@ -161,6 +180,12 @@ export interface IRoute {
    * if not provided, then the page can be accessed by every user
    */
   roles?: string[];
+    
+  /**
+   * user must have all roles from `roles` array to access the route,
+   * defaults to `false` 
+   */
+  allRolesRequired?: boolean;
 }
 ```
 

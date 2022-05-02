@@ -18,6 +18,12 @@ export interface IRoute {
    * if not provided, then the page can be accessed by every user
    */
   roles?: string[];
+
+  /**
+   * user must have all roles from `roles` array to access the route,
+   * defaults to `false`
+   */
+  allRolesRequired?: boolean;
 }
 
 export interface IRoutesConfig {
@@ -37,7 +43,7 @@ export interface IRoutesConfig {
   defaultFallback?: React.ReactElement;
 
   /** fallback component in case the user does not have the required role to access the route */
-  InvalidUserRoleFallback?: React.ComponentType<any>
+  InvalidUserRoleFallback?: React.ComponentType<any>;
 
   /** private routes are accessible only by authorized users */
   private?: IRoute[];
@@ -57,5 +63,5 @@ export interface IRouterContextProps {
   isAuth?: boolean;
 
   /** current user role that will be validated for accessing a specific route */
-  userRole?: string;
+  userRole?: string[] | string; // support for multiple roles
 }
