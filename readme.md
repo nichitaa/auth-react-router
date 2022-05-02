@@ -107,6 +107,16 @@ To add a new route just add it to `public`, `private` or `common` array and it w
 
 **Check out [example](./example) directory for a demo application (includes all most of the described features).**
 
+```bash
+$ git clone https://github.com/nichitaa/auth-react-router # clone repo
+$ npm i # install library dependencies
+$ npm start # build the library `dist` folder
+
+$ cd example
+$ npm i # install demo app dependencies 
+$ npm run dev # see live changes for demo app
+```
+
 
 
 ### **Router / Routes basic configuration**
