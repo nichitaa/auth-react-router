@@ -1,5 +1,5 @@
 {
-  "version": "0.2.3",
+  "version": "0.2.4",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -26,19 +26,8 @@
       "pre-commit": "tsdx lint"
     }
   },
-  "prettier": {
-    "trailingComma": "all",
-    "tabWidth": 2,
-    "printWidth": 80,
-    "semi": true,
-    "jsxSingleQuote": true,
-    "singleQuote": true,
-    "bracketSpacing": true,
-    "jsxBracketSameLine": false,
-    "arrowParens": "always"
-  },
   "name": "auth-react-router",
-  "author": "Pasecinic Nichita",
+  "author": "Pasecinic Nichita <nichitaap@gmail.com>",
   "module": "dist/auth-react-router.esm.js",
   "size-limit": [
     {
@@ -51,17 +40,28 @@
     }
   ],
   "devDependencies": {
-    "@size-limit/preset-small-lib": "^7.0.5",
+    "@size-limit/preset-small-lib": "^7.0.8",
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "size-limit": "^7.0.5",
+    "size-limit": "^7.0.8",
     "tsdx": "^0.14.1",
-    "tslib": "^2.3.1",
-    "typescript": "^3.9.10"
+    "tslib": "^2.4.0",
+    "typescript": "^4.6.4"
+  },
+  "prettier": {
+    "trailingComma": "all",
+    "tabWidth": 2,
+    "printWidth": 80,
+    "semi": true,
+    "jsxSingleQuote": true,
+    "singleQuote": true,
+    "bracketSpacing": true,
+    "jsxBracketSameLine": false,
+    "arrowParens": "always"
   },
   "dependencies": {
-    "react-router-dom": "^6.2.1"
+    "react-router-dom": "^6.3.0"
   }
 }
