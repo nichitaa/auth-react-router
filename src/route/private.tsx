@@ -15,7 +15,7 @@ export const Private: FC<IRoute> = (props): ReactElement => {
     isAuth,
     userRole,
   } = ctx!;
-  const [userHasRequiredRole] = useRole(path, userRole, roles, allRolesRequired);
+  const [userHasRequiredRole] = useRole(path, roles, allRolesRequired);
 
   const redirectTo: string = publicRedirectRoute ? publicRedirectRoute : '/';
   const SuspenseFallbackComponent = fallback

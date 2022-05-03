@@ -12,7 +12,7 @@ const NestedPrivatePage = () => {
   const { isAllowed, userRole } = useCheckRole(roles.OPERATION, true);
   console.log('isAllowed: ', isAllowed, userRole);
   // render UI based on isAllowed flag
-  return <h1>Nested Private Page :id {params.id}</h1>;
+  return <h1>Nested Private Page :id {params.id} {isAllowed && <p>and is allowed to see this</p>}</h1>;
 };
 
 export const routes: IRoutesConfig = {

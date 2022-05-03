@@ -23,7 +23,7 @@ export const useCheckRole = (
     );
   }
 
-  const { userRole } = ctx!;
+  const { userRole } = ctx;
 
   useEffect(() => {
     if (userRole === undefined) {

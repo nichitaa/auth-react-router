@@ -11,7 +11,7 @@ export const Common: FC<IRoute> = (props): ReactElement => {
     routes: { defaultFallback, InvalidUserRoleFallback },
     userRole,
   } = ctx!;
-  const [userHasRequiredRole] = useRole(path, userRole, roles, allRolesRequired);
+  const [userHasRequiredRole] = useRole(path, roles, allRolesRequired);
 
   const SuspenseFallbackComponent = fallback
     ? fallback

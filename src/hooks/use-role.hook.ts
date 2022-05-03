@@ -1,22 +1,28 @@
-import { useEffect, useState } from 'react';
+import {useContext, useEffect, useState} from 'react';
+import {RouterContext} from "../context/context";
 
 /**
  * Custom hook that returns a boolean value if the user can access the specified route path,
  * by assigned role
  *
  * @param path
- * @param userRole
  * @param routeRoles
  * @param allRolesRequired
  * @returns [boolean]
  */
 export const useRole = (
   path: string,
-  userRole?: string[] | string,
   routeRoles?: string[],
   allRolesRequired?: boolean,
 ) => {
+  const ctx = useContext(RouterContext);
+  if (!ctx) {
+    throw new Error(
+      `useRole hook must be used inside AppRouter provider!`,
+    );
+  }
   const [userHasRequiredRole, setUserHasRequiredRole] = useState(false);
+  const { userRole } = ctx;
 
   useEffect(() => {
     /** the route has some roles */
