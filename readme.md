@@ -68,7 +68,7 @@ export const routes: IRoutesConfig = {
     // nested routes example
     {
       path: '/posts',
-      component: <h1>Posts Lists</h1>
+      component: <h1>Posts Lists</h1>,
       children: [
         {
           path: 'create',
@@ -76,14 +76,14 @@ export const routes: IRoutesConfig = {
     	},
         {
           path: ':id',
-          component: <h1>Single post</h1>
+          component: <h1>Single post</h1>,
           children: [
             {
-        	  path: 'update',
+              path: 'update',
               component: <h1>update post with dynamic :id</h1>
-    		}
+            }
           ]
-    	}
+        }
       ]
     }
   ],
