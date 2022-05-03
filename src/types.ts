@@ -7,6 +7,9 @@ export interface IRoute {
   /** the component to be rendered under the path */
   component: React.ReactElement;
 
+  /** used for nested routes */
+  children?: IRoute[];
+
   /**
    * if route component is lazy loaded using React.lazy() a fallback loading / spinner component can be specified
    * it has higher priority then the `defaultFallback` component
