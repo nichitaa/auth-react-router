@@ -117,7 +117,51 @@ $ npm i # install demo app dependencies
 $ npm run dev # see live changes for demo app
 ```
 
+### **Hooks**
 
+### `useCheckRole`
+
+Validate current user role with some given roles. This way is easy to dynamically render the UI, block or allow some of your application functionalities in dependence with user role.
+
+`useCheckRole` arguments:
+
+```typescript
+requiredRoles: string | string[]; // role/roles to check against 
+allRolesRequired?: boolean; // if user must have all roles to have access to resource
+```
+
+`useCheckRole` return:
+
+```typescript
+interface IUseCheckRoleReturn {
+  isAllowed?: boolean; // eighter user has required permission or not
+  userRole?: string[] | string; // current user permission
+}
+```
+
+**usage:**
+
+```jsx
+const Component = () => {
+  const { isAllowed, userRole } = useCheckRole(roles.OPERATION);
+  // render UI based on isAllowed flag
+  return <h1>Component {isAllowed && <p>and isAllowed</p>}</h1>;
+};
+```
+
+```jsx
+const Component = () => {
+  const { isAllowed, userRole } = useCheckRole(['OPERATION', 'ADMIN']); // should have only one of them
+  return <h1>Component {isAllowed && <p>and isAllowed</p>}</h1>;
+};
+```
+
+```jsx
+const Component = () => {
+  const { isAllowed, userRole } = useCheckRole(['OPERATION', 'ADMIN'], true); // should have both roles
+  return <h1>Component {isAllowed && <p>and isAllowed</p>}</h1>;
+};
+```
 
 ### **Router / Routes basic configuration**
 
