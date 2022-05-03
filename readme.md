@@ -64,6 +64,27 @@ export const routes: IRoutesConfig = {
       roles: [roles.ADMIN, roles.OPERATION], 
       allRolesRequired: true, // user must have ADMIN and OPERATION role to access this route
       component: <h1>ADMIN and OPERATION Page</h1>,
+    },
+    // nested routes example
+    {
+      path: '/posts',
+      component: <h1>Posts Lists</h1>
+      children: [
+        {
+          path: 'create',
+          component: <h1>create new post</h1>
+    	},
+        {
+          path: ':id',
+          component: <h1>Single post</h1>
+          children: [
+            {
+        	  path: 'update',
+              component: <h1>update post with dynamic :id</h1>
+    		}
+          ]
+    	}
+      ]
     }
   ],
   common: [
@@ -222,6 +243,9 @@ export interface IRoute {
 
   /** the component to be rendered under the path */
   component: React.ReactElement;
+   
+  /** used for nested (aka children) routes definition */
+  children?: IRoute[];
 
   /**
    * if route component is lazy loaded using React.lazy() a fallback loading / spinner component can be specified

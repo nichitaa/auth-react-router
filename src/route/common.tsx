@@ -1,7 +1,7 @@
 import React, { FC, ReactElement, Suspense, useContext } from 'react';
 import { RouterContext } from '../context/context';
 import { IRoute } from '../types';
-import { useRole } from '../hooks/use-role.hook';
+import { useRole } from '../hooks';
 import InvalidUserDefaultFallback from '../shared/invalid-user-default-fallback';
 
 export const Common: FC<IRoute> = (props): ReactElement => {
@@ -11,7 +11,7 @@ export const Common: FC<IRoute> = (props): ReactElement => {
     routes: { defaultFallback, InvalidUserRoleFallback },
     userRole,
   } = ctx!;
-  const [userHasRequiredRole] = useRole(path, userRole, roles, allRolesRequired);
+  const [userHasRequiredRole] = useRole(path, roles, allRolesRequired);
 
   const SuspenseFallbackComponent = fallback
     ? fallback
@@ -20,20 +20,17 @@ export const Common: FC<IRoute> = (props): ReactElement => {
     : null;
 
   if (!userHasRequiredRole) {
-    if (InvalidUserRoleFallback)
-      return (
-        <InvalidUserRoleFallback
-          currentUserRole={userRole}
-          routeRequiredRoles={roles}
-        />
-      );
-    else
-      return (
-        <InvalidUserDefaultFallback
-          currentUserRole={userRole}
-          routeRequiredRoles={roles}
-        />
-      );
+    return InvalidUserRoleFallback ? (
+      <InvalidUserRoleFallback
+        currentUserRole={userRole}
+        routeRequiredRoles={roles}
+      />
+    ) : (
+      <InvalidUserDefaultFallback
+        currentUserRole={userRole}
+        routeRequiredRoles={roles}
+      />
+    );
   }
 
   return <Suspense fallback={SuspenseFallbackComponent}>{component}</Suspense>;

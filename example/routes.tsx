@@ -12,7 +12,12 @@ const NestedPrivatePage = () => {
   const { isAllowed, userRole } = useCheckRole(roles.OPERATION, true);
   console.log('isAllowed: ', isAllowed, userRole);
   // render UI based on isAllowed flag
-  return <h1>Nested Private Page :id {params.id}</h1>;
+  return (
+    <h1>
+      Nested Private Page :id {params.id}{' '}
+      {isAllowed && <p>and is allowed to see this</p>}
+    </h1>
+  );
 };
 
 export const routes: IRoutesConfig = {
@@ -43,10 +48,22 @@ export const routes: IRoutesConfig = {
     {
       path: '/private',
       component: <h1>Private Page</h1>,
-    },
-    {
-      path: '/private/:id',
-      component: <NestedPrivatePage />,
+      children: [
+        {
+          path: 'create',
+          component: <h1>nested private /create</h1>
+        },
+        {
+          path: ':id',
+          component: <NestedPrivatePage />,
+          children: [
+            {
+              path: 'update',
+              component: <h1>nested private /:id/update</h1>
+            }
+          ]
+        },
+      ],
     },
     {
       path: '/role_admin_or_operation',
@@ -76,6 +93,18 @@ export const routes: IRoutesConfig = {
     {
       path: '/common',
       component: <h1>Common page</h1>,
+      children: [
+        {
+          path: 'nested',
+          component: <h1>a nested common path</h1>,
+          children: [
+            {
+              path: 'more',
+              component: <h1>need more ?</h1>,
+            },
+          ],
+        },
+      ],
     },
     {
       path: '*',
