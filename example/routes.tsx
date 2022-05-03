@@ -1,5 +1,5 @@
-import { IRoutesConfig } from '../.';
-import { Navigate, useLocation, useParams } from 'react-router-dom';
+import { IRoutesConfig, useCheckRole } from '../.';
+import { Navigate, useParams } from 'react-router-dom';
 
 export const roles = {
   ADMIN: 'ADMIN',
@@ -9,6 +9,9 @@ export const roles = {
 
 const NestedPrivatePage = () => {
   const params = useParams();
+  const { isAllowed, userRole } = useCheckRole(roles.OPERATION, true);
+  console.log('isAllowed: ', isAllowed, userRole);
+  // render UI based on isAllowed flag
   return <h1>Nested Private Page :id {params.id}</h1>;
 };
 

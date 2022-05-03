@@ -4,8 +4,8 @@
 
 import { AppRouter, Routes } from '../../.';
 import { roles, routes } from '../routes';
-import {useEffect, useState} from 'react';
-import {Link, useLocation, useNavigate} from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const App = () => {
   const [isAuth, setIsAuth] = useState(false);
@@ -13,18 +13,18 @@ const App = () => {
     roles.OPERATION
   );
   const navigate = useNavigate();
-  const location = useLocation() as { state: { from?: { pathname?: string } } };
+  const location = useLocation() as { state: { from?: { pathname?: string } }, pathname: string };
 
   useEffect(() => {
-    if(isAuth) {
+    if (isAuth) {
       // returnUrl is the last private route that user tried to access, but it was unauthorized, and it was redirected to `/login`
       // so if user logins successfully, then we should redirect it on that route, instead of the default `/home` path
       const returnUrl = location.state?.from?.pathname;
       if (returnUrl) {
-        navigate(returnUrl)
+        navigate(returnUrl);
       }
     }
-  }, [isAuth])
+  }, [isAuth]);
 
   // login - logout functionality
   const toggleIsAuth = () => {
