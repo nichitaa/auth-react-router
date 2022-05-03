@@ -52,7 +52,19 @@ const App = () => {
           <Link to={'/private/1'}>/private/:id</Link>
         </li>
         <li>
+          <Link to={'/private/create'}>/private/create</Link>
+        </li>
+        <li>
+          <Link to={'/private/1/update'}>/private/:id/update</Link>
+        </li>
+        <li>
           <Link to={'/common'}>/common</Link>
+        </li>
+        <li>
+          <Link to={'/common/nested'}>/common/nested</Link>
+        </li>
+        <li>
+          <Link to={'/common/nested/more'}>/common/nested/more</Link>
         </li>
         <li>
           <Link to={'/404'}>/404</Link>
