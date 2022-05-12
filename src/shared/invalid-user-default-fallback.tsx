@@ -16,7 +16,7 @@ const InvalidUserDefaultFallback: FC<MainProps> = ({
     </p>
     <br />
     <p>
-      Route required roles:{' '}
+      Route required roles:&nbsp;
       <strong>{JSON.stringify(routeRequiredRoles)}</strong>
     </p>
   </>
