@@ -82,7 +82,7 @@ const App = () => {
           </Link>
         </li>
       </ul>
-      <fieldset>
+      <fieldset style={{minHeight: 100}}>
         <legend>pages wrapper</legend>
         <Routes />
       </fieldset>

@@ -19,7 +19,7 @@ export const Common: FC<IRoute> = (props): ReactElement => {
     ? defaultFallback
     : null;
 
-  if (userHasRequiredRole === false) {
+  if (!userHasRequiredRole) {
     return InvalidUserRoleFallback ? (
       <InvalidUserRoleFallback
         currentUserRole={userRole}
