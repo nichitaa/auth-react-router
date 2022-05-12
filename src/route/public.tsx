@@ -28,7 +28,7 @@ export const Public: FC<IRoute> = (props): ReactElement => {
   }
 
   /** user must have the required role that matches a route role */
-  if (!userHasRequiredRole) {
+  if (userHasRequiredRole === false) {
     return InvalidUserRoleFallback ? (
       <InvalidUserRoleFallback
         currentUserRole={userRole}
