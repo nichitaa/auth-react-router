@@ -2,7 +2,7 @@ import React from 'react';
 
 export interface IRoute {
   /** a valid react-router-dom v6 path */
-  path: string;
+  path?: string;
 
   /** the component to be rendered under the path */
   component: React.ReactElement;

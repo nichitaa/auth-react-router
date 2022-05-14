@@ -87,11 +87,11 @@ export const routes: IRoutesConfig = {
         },
         {
           path: ':id',
-          component: <Outlet/>,
+          component: <Outlet />,
           children: [
             {
               index: true,
-              component: <NestedPrivatePage />
+              component: <NestedPrivatePage />,
             },
             {
               path: 'update',
