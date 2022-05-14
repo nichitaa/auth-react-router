@@ -11,7 +11,7 @@ import { RouterContext } from '../context/context';
  * @returns [boolean]
  */
 export const useRole = (
-  path: string,
+  path?: string,
   routeRoles?: string[],
   allRolesRequired?: boolean,
 ) => {
@@ -34,7 +34,7 @@ export const useRole = (
 };
 
 const checkRole = (
-  path: string,
+  path?: string,
   routeRoles?: string[],
   userRole?: string[] | string,
   allRolesRequired?: boolean,

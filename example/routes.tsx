@@ -128,12 +128,24 @@ export const routes: IRoutesConfig = {
     },
     {
       path: '/common',
-      component: <h1>Common page</h1>,
+      component: (
+        <>
+          common page layout <Outlet />
+        </>
+      ),
       children: [
         {
+          index: true,
+          component: <h1>Common page</h1>,
+        },
+        {
           path: 'nested',
-          component: <h1>a nested common path</h1>,
+          component: <Outlet />,
           children: [
+            {
+              index: true,
+              component: <h1>a nested common path</h1>,
+            },
             {
               path: 'more',
               component: <h1>need more ?</h1>,
