@@ -7,6 +7,9 @@ export interface IRoute {
   /** the component to be rendered under the path */
   component: React.ReactElement;
 
+  /** if this is a route definition for index path */
+  index?: boolean;
+
   /** used for nested routes */
   children?: IRoute[];
 

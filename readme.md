@@ -68,16 +68,30 @@ export const routes: IRoutesConfig = {
     // nested routes example
     {
       path: '/posts',
-      component: <h1>Posts Lists</h1>,
+      component: <>
+        <h1>Posts Lists Layout</h1>
+        <Outlet/> {/* render outlet (the matched paths) */}
+      </>,
       children: [
+        {
+          index: true,
+          component: <h1>a list of posts here...</h1>
+        },
         {
           path: 'create',
           component: <h1>create new post</h1>
     	},
         {
           path: ':id',
-          component: <h1>Single post</h1>,
+          component: <>
+            Single post page layout
+            <Outlet/>
+          </>,
           children: [
+            {
+              index: true,
+              component: <h1>post details</h1>
+            },
             {
               path: 'update',
               component: <h1>update post with dynamic :id</h1>
@@ -243,6 +257,9 @@ export interface IRoute {
 
   /** the component to be rendered under the path */
   component: React.ReactElement;
+    
+  /** if this is a route definition for index path */
+  index?: boolean;
    
   /** used for nested (aka children) routes definition */
   children?: IRoute[];

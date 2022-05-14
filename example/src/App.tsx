@@ -82,6 +82,19 @@ const App = () => {
           </Link>
         </li>
       </ul>
+      <br/>
+      with outlet:
+      <ul>
+        <li>
+          <Link to={'/outlet'}>/outlet</Link>
+        </li>
+        <li>
+          <Link to={'/outlet/more'}>/outlet/more</Link>
+        </li>
+        <li>
+          <Link to={'/outlet/less'}>/outlet/less</Link>
+        </li>
+      </ul>
       <fieldset style={{minHeight: 100}}>
         <legend>pages wrapper</legend>
         <Routes />

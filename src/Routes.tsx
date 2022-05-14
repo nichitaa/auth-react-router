@@ -21,14 +21,18 @@ const createNestedRoutes = (
         }
         if (route.children) {
           return (
-            <Route key={i} path={route.path}>
-              <Route index={true} element={<RouteType {...route} />} />
+            <Route key={i} path={route.path} element={<RouteType {...route} />}>
               {route.children && createNestedRoutes(route.children, RouteType)}
             </Route>
           );
         }
         return (
-          <Route key={i} path={route.path} element={<RouteType {...route} />} />
+          <Route
+            index={route.index}
+            key={i}
+            path={route.path}
+            element={<RouteType {...route} />}
+          />
         );
       })}
     </>

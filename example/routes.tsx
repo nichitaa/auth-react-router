@@ -1,5 +1,5 @@
 import { IRoutesConfig, useCheckRole } from '../.';
-import { Navigate, useParams } from 'react-router-dom';
+import { Navigate, useParams, Outlet } from 'react-router-dom';
 
 export const roles = {
   ADMIN: 'ADMIN',
@@ -42,26 +42,62 @@ export const routes: IRoutesConfig = {
   ],
   private: [
     {
+      path: '/outlet',
+      component: (
+        <>
+          <h1>outlet path (this must be visible)</h1>
+          <Outlet />
+        </>
+      ),
+      children: [
+        {
+          index: true,
+          component: <h1>index path</h1>,
+        },
+        {
+          path: 'more',
+          component: <h1>more</h1>,
+        },
+        {
+          path: 'less',
+          component: <h1>less</h1>,
+        },
+      ],
+    },
+    {
       path: '/home',
       component: <h1>Home Page</h1>,
     },
     {
       path: '/private',
-      component: <h1>Private Page</h1>,
+      component: (
+        <>
+          <span>some private layout</span>
+          <Outlet />
+        </>
+      ),
       children: [
         {
+          index: true,
+          component: <h1>Private Page</h1>,
+        },
+        {
           path: 'create',
-          component: <h1>nested private /create</h1>
+          component: <h1>nested private /create</h1>,
         },
         {
           path: ':id',
-          component: <NestedPrivatePage />,
+          component: <Outlet/>,
           children: [
             {
+              index: true,
+              component: <NestedPrivatePage />
+            },
+            {
               path: 'update',
-              component: <h1>nested private /:id/update</h1>
-            }
-          ]
+              component: <h1>nested private /:id/update</h1>,
+            },
+          ],
         },
       ],
     },
