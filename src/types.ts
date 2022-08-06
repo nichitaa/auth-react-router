@@ -70,4 +70,7 @@ export interface IRouterContextProps {
 
   /** current user role that will be validated for accessing a specific route */
   userRole?: string[] | string; // support for multiple roles
+
+  /** React 18 TS support */
+  children?: React.ReactNode;
 }

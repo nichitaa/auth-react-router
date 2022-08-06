@@ -2,7 +2,7 @@ import React from 'react';
 import { IRouterContextProps } from '../types';
 import { RouterContext } from './context';
 
-const RouterProvider: React.FC<IRouterContextProps> = (props) => {
+const RouterProvider = (props: IRouterContextProps) => {
   const { children, routes, isAuth, userRole } = props;
 
   return (
