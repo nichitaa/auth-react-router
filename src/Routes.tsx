@@ -1,6 +1,6 @@
 import React, { ReactElement, useContext } from 'react';
 import { RouterContext } from './context/context';
-import { Route, Routes as ReactRouterDomRoutes, useLocation } from 'react-router-dom';
+import { Route, Routes as ReactRouterDomRoutes } from 'react-router-dom';
 import { Common, Private, Public } from './route';
 import { IRoute } from './types';
 
@@ -41,7 +41,6 @@ const createNestedRoutes = (
 
 export const Routes = () => {
   const ctx = useContext(RouterContext);
-  const location = useLocation();
   if (!ctx)
     throw Error(
       `<Routes /> Component must be inside a SimpleReactRouterProvider`,
@@ -50,7 +49,7 @@ export const Routes = () => {
   const { routes, isAuth } = ctx;
 
   return (
-    <ReactRouterDomRoutes location={location} key={location.pathname}>
+    <ReactRouterDomRoutes>
       {routes.common && createNestedRoutes(routes.common, Common)}
 
       {isAuth !== undefined &&
