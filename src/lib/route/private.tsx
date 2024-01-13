@@ -18,8 +18,6 @@ export const Private = (route: RouteProps) => {
   const routeFallback = useFallbackRoute(route, 'private');
   const hasRoles = useHasRoles(route);
 
-  console.log({authorized, routeFallback, route});
-
   if (!authorized) {
     return <Navigate to={routeFallback} state={{ from: location }} />;
   }

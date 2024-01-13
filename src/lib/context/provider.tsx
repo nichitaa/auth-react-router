@@ -9,7 +9,6 @@ export const AuthReactRouterProvider = ({
   roles,
   routes,
 }: RouterContextProps) => {
-  console.log('[AuthReactRouterProvidsssser]');
 
   const value: AuthReactRouterContextValue = useMemo(
     () => ({
