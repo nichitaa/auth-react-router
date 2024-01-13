@@ -1,4 +1,4 @@
-[tsdoc.dev documentation](https://tsdocs.dev/docs/@nichitaa/auth-react-router/0.1.0/index.html)
+[tsdoc.dev documentation](https://tsdocs.dev/docs/@nichitaa/auth-react-router)
 
 **`@nichitaa/auth-react-router`** is a lightweight package that uses and extends basic `react-router-dom` v6
 functionality and allows you to define the routes based on user `authorized` and `roles` states. It provides a simple
