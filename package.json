@@ -1,67 +1,71 @@
 {
-  "version": "0.4.7",
-  "license": "MIT",
-  "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
-  "files": [
-    "dist",
-    "src"
+  "name": "@nichitaa/auth-react-router",
+  "private": false,
+  "version": "0.0.0",
+  "keywords": [
+    "react",
+    "react-router",
+    "react-router-dom",
+    "authorization",
+    "RBAC"
   ],
-  "engines": {
-    "node": ">=10"
+  "author": {
+    "name": "Nichita Pasecinic",
+    "email": "nichittaa@gmail.com"
   },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nichitaa/auth-react-router.git"
+  },
+  "homepage": "https://github.com/nichitaa/auth-react-router#readme",
+  "main": "./dist/index.umd.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.umd.cjs"
+      }
+    }
+  },
+  "type": "module",
   "scripts": {
-    "start": "tsdx watch",
-    "build": "tsdx build",
-    "lint": "tsdx lint",
-    "prepare": "tsdx build",
-    "size": "size-limit"
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "publint": "npx publint",
+    "release": "npm run build && npx changeset publish"
   },
   "peerDependencies": {
     "react": ">=16",
-    "react-router-dom": ">=6"
+    "react-dom": ">=16",
+    "react-router-dom": "^6.x"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "tsdx lint"
-    }
-  },
-  "name": "auth-react-router",
-  "author": "Pasecinic Nichita <nichitaap@gmail.com>",
-  "module": "dist/auth-react-router.esm.js",
-  "size-limit": [
-    {
-      "path": "dist/auth-react-router.cjs.production.min.js",
-      "limit": "10 KB"
-    },
-    {
-      "path": "dist/auth-react-router.esm.js",
-      "limit": "10 KB"
-    }
-  ],
   "devDependencies": {
-    "@size-limit/preset-small-lib": "^7.0.8",
-    "@types/react": "^17.0.38",
-    "@types/react-dom": "^17.0.11",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "size-limit": "^7.0.8",
-    "tsdx": "^0.14.1",
-    "tslib": "^2.4.0",
-    "typescript": "^4.6.4"
-  },
-  "prettier": {
-    "trailingComma": "all",
-    "tabWidth": 2,
-    "printWidth": 80,
-    "semi": true,
-    "jsxSingleQuote": true,
-    "singleQuote": true,
-    "bracketSpacing": true,
-    "jsxBracketSameLine": false,
-    "arrowParens": "always"
-  },
-  "dependencies": {
-    "react-router-dom": "^6.3.0"
+    "@changesets/cli": "^2.27.1",
+    "@types/node": "^20.11.0",
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
+    "@typescript-eslint/eslint-plugin": "^6.14.0",
+    "@typescript-eslint/parser": "^6.14.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    "eslint": "^8.55.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "prettier": "^3.2.1",
+    "publint": "^0.2.7",
+    "typescript": "^5.2.2",
+    "vite": "^5.0.8",
+    "vite-plugin-dts": "^3.7.0"
   }
 }
