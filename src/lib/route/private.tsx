@@ -9,6 +9,9 @@ import {
   useSuspenseFallbackComponent,
 } from '../hooks';
 
+/**
+ * @internal
+ */
 export const Private = (route: RouteProps) => {
   const location = useLocation();
 
@@ -17,8 +20,6 @@ export const Private = (route: RouteProps) => {
   const InvalidRolesFallback = useInvalidRolesFallbackComponent(route);
   const routeFallback = useFallbackRoute(route, 'private');
   const hasRoles = useHasRoles(route);
-
-  console.log({authorized, routeFallback, route});
 
   if (!authorized) {
     return <Navigate to={routeFallback} state={{ from: location }} />;

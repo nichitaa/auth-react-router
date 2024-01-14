@@ -6,6 +6,9 @@ import {
   useSuspenseFallbackComponent,
 } from '../hooks';
 
+/**
+ * @internal
+ */
 export const Common = (route: RouteProps) => {
   const suspenseFallback = useSuspenseFallbackComponent(route);
   const InvalidRolesFallback = useInvalidRolesFallbackComponent(route);

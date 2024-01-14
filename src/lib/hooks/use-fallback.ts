@@ -3,6 +3,9 @@ import type { FallbackProps, RouteProps } from '../types';
 import { type SuspenseProps, useMemo } from 'react';
 import { isDefined } from '../utils';
 
+/**
+ * @internal
+ */
 export const useSuspenseFallbackComponent = ({
   fallback,
 }: Pick<RouteProps, 'fallback'>): SuspenseProps['fallback'] => {
@@ -13,7 +16,9 @@ export const useSuspenseFallbackComponent = ({
     return routes.fallback.Suspense;
   }, [fallback?.Suspense, routes.fallback.Suspense]);
 };
-
+/**
+ * @internal
+ */
 export const useInvalidRolesFallbackComponent = ({
   fallback,
 }: Pick<RouteProps, 'fallback'>): FallbackProps['InvalidRoles'] => {
@@ -25,6 +30,9 @@ export const useInvalidRolesFallbackComponent = ({
   }, [fallback?.InvalidRoles, routes.fallback.InvalidRoles]);
 };
 
+/**
+ * @internal
+ */
 export const useFallbackRoute = (
   { fallback }: Pick<RouteProps, 'fallback'>,
   type: 'private' | 'public',

@@ -3,6 +3,10 @@ import type { RouteProps } from '../types';
 import { useMemo } from 'react';
 import { isDefined } from '../utils';
 
+/**
+ * Hook check if user has required role or not
+ * @category Hook
+ */
 export const useHasRoles = ({
   allRolesRequired,
   roles,

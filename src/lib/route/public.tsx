@@ -9,6 +9,9 @@ import {
   useFallbackRoute,
 } from '../hooks';
 
+/**
+ * @internal
+ */
 export const Public = (route: RouteProps) => {
   const { authorized } = useAuthReactRouter();
 

@@ -1,6 +1,9 @@
 import type { FallbackProps } from '../types';
 import { useAuthReactRouter } from '../hooks';
 
+/**
+ * @internal
+ */
 export const InvalidRolesDefaultFallback: FallbackProps['InvalidRoles'] = ({ path, roles }) => {
   const { roles: userRole } = useAuthReactRouter();
 

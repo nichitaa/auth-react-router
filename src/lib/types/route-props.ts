@@ -4,6 +4,8 @@ import type { FallbackProps } from './fallback-props.ts';
 
 /**
  * Single route configuration
+ *
+ * @category Interface
  */
 export interface RouteProps
   extends Pick<RouteObject, 'index' | 'path' | 'element' | 'caseSensitive' | 'handle'> {
