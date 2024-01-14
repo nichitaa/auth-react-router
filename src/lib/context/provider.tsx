@@ -1,14 +1,35 @@
-import type { RouterContextProps } from '../types';
+import type { AuthReactRouterProps } from '../types';
 import { useMemo } from 'react';
 import { getRoutesConfig } from '../utils';
 import { AuthReactRouterContext, type AuthReactRouterContextValue } from '../context';
 
+/**
+ * AuthReactRouter Provider
+ *
+ * ### Example
+ * ```jsx
+ * const App = () => {
+ *   const {isAuthorized, userRoles} = useAuthProvider();
+ *
+ *   return (
+ *     <AuthReactRouter routes={routes} authorized={isAuthorized} roles={userRoles}>
+ *       <Header />
+ *       <Layout>
+ *         <RoutesRoot />
+ *       </Layout>
+ *     </AuthReactRouter>
+ *   );
+ * }
+ * ```
+ *
+ * @category Component
+ */
 export const AuthReactRouterProvider = ({
   children,
   authorized,
   roles,
   routes,
-}: RouterContextProps) => {
+}: AuthReactRouterProps) => {
 
   const value: AuthReactRouterContextValue = useMemo(
     () => ({

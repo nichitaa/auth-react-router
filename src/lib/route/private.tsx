@@ -9,6 +9,9 @@ import {
   useSuspenseFallbackComponent,
 } from '../hooks';
 
+/**
+ * @internal
+ */
 export const Private = (route: RouteProps) => {
   const location = useLocation();
 

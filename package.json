@@ -47,7 +47,8 @@
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
     "test:ui": "vitest --ui",
-    "vitest-preview": "vitest-preview",
+    "typedoc": "npx typedoc",
+    "serve:docs": "npx typedoc && serve docs --cors -p 8080",
     "release": "npm run build && npx changeset publish"
   },
   "peerDependencies": {
@@ -73,10 +74,12 @@
     "jsdom": "^23.2.0",
     "prettier": "^3.2.1",
     "publint": "^0.2.7",
+    "serve": "^14.2.1",
+    "typedoc": "^0.25.7",
+    "typedoc-plugin-markdown": "^3.17.1",
     "typescript": "^5.2.2",
     "vite": "^5.0.8",
     "vite-plugin-dts": "^3.7.0",
-    "vitest": "^1.2.0",
-    "vitest-preview": "^0.0.1"
+    "vitest": "^1.2.0"
   }
 }

@@ -2,9 +2,11 @@ import type { RoutesConfig } from './routes-config.ts';
 import type { ReactNode } from 'react';
 
 /**
- * `AuthReactRouter` Provider props
+ * Props for {@link AuthReactRouter | `AuthReactRouter`}
+ *
+ * @category Interface
  */
-export interface RouterContextProps {
+export interface AuthReactRouterProps {
   /**
    * Application routes definitions
    */

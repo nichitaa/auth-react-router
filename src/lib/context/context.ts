@@ -1,11 +1,17 @@
-import type { RouterContextProps } from '../types';
+import type { AuthReactRouterProps } from '../types';
 import { getRoutesConfig } from '../utils';
 import { createContext } from 'react';
 
-export type AuthReactRouterContextValue = Pick<RouterContextProps, 'authorized' | 'roles'> & {
+/**
+ * @internal
+ */
+export type AuthReactRouterContextValue = Pick<AuthReactRouterProps, 'authorized' | 'roles'> & {
   routes: ReturnType<typeof getRoutesConfig>;
 };
 
+/**
+ * @internal
+ */
 export const AuthReactRouterContext = createContext<AuthReactRouterContextValue | undefined>(
   undefined,
 );

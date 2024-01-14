@@ -2,7 +2,9 @@ import type { RouteProps } from './route-props.ts';
 import type { FallbackProps } from './fallback-props.ts';
 
 /**
- * Definitions/configurations for all routes in the application
+ * Routes configurations for the application
+ *
+ * @category Interface
  */
 export interface RoutesConfig {
   /**
