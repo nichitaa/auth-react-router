@@ -2,6 +2,7 @@
 functionality and allows you to define the routes based on user `authorized` and `roles` states. It provides a simple
 API for configuring `public`, `private` and `common` routes, and it has a simple and advance RBAC configuration.
 
+[Documentation (`typedoc`)](https://nichitaa.github.io/auth-react-router/)
 
 This code and routing pattern is used on most of my personal projects and would probably meet most of the routing
 requirement for any other react application, but beware and use it at your own risk.
