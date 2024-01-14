@@ -1,7 +1,7 @@
 import type { RouteProps } from '../types';
 import type { FC } from 'react';
 import { Route } from 'react-router-dom';
-import { isDefined } from '../utils';
+import { isDefined } from './index';
 
 export const createNestedRoutes = (RouteType: FC<RouteProps>, routes?: RouteProps[]) => {
   if (!isDefined(routes)) return null;
