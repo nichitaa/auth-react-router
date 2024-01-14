@@ -1,0 +1,6 @@
+node_modules
+dist
+.idea
+coverage
+docs
+demo-app
