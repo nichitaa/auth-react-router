@@ -1,5 +1,11 @@
 # @nichitaa/auth-react-router
 
+## 0.1.2
+
+### Patch Changes
+
+- e194feb: add MIT license
+
 ## 0.1.1
 
 ### Patch Changes
